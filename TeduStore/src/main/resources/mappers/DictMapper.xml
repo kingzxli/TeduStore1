@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 接口，方法实例化对象 -->
+<mapper namespace="cn.tedu.store.mapper.DictMapper">
+	<!-- 查询所有的省份信息 -->
+	<select id="selectProvince" resultType="cn.tedu.store.bean.Province">
+		select id,province_code provinceCode,province_name provinceName from
+		t_dict_provinces
+	</select>
+	<!-- 根据省份编号查寻城市 -->
+	<select id="selectCity" resultType="cn.tedu.store.bean.City">
+		select id,
+		province_Code provinceCode,
+		city_Code cityCode,
+		city_name cityName
+		from
+		t_dict_cities
+		where province_code=#{provinceCode}
+	</select>
+	<!-- 根据城市编号查询所属区域 -->
+	<select id="selectArea" resultType="cn.tedu.store.bean.Area">
+		select id,
+		city_Code cityCode,
+		area_Code areaCode,
+		area_name areaName
+		from
+		t_dict_areas
+		where city_code=#{cityCode}		
+	</select>
+	
+	<!-- 查询省的名称 -->
+	<select id="selectByProvinceCode" resultType="java.lang.String">
+		select province_name from t_dict_provinces where province_code=#{provinceCode}
+	</select>
+	
+	<!-- 查询市的名称 -->
+	<select id="selectByCityCode" resultType="java.lang.String">
+		select city_name from t_dict_cities where city_code=#{cityCode}
+	</select>
+	
+	<!-- 查询区的名称 -->
+	<select id="selectByAreaCode" resultType="java.lang.String">
+		select area_name from t_dict_areas where area_code=#{areaCode}
+	</select>
+</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
